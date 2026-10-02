@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../assets/logo.png";
+import logo from "../assets/fitness-tracker.png";
 import { useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "../features/auth/authApi";
 import { toast } from "react-toastify";
