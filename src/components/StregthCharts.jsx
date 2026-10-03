@@ -19,6 +19,8 @@ const StrengthChart = ({records = []}) => {
     weight: Number(record.weight),
     reps: Number(record.reps),
   }));
+  const minWeight = Math.floor(Math.min(...data.map(item => item.weight)));
+  const maxWeight = Math.ceil(Math.max(...data.map((item => item.weight))));
   return (
     <div className="h-64 w-full">
       <ResponsiveContainer width="100%" height="100%">
@@ -27,9 +29,9 @@ const StrengthChart = ({records = []}) => {
         >
           {/* <CartesianGrid strokeDasharray="3 3" /> */}
 
-          <XAxis dataKey="date" />
+          <XAxis dataKey="date" hide/>
 
-          <YAxis width={30} />
+          <YAxis width={30} domain={[minWeight,maxWeight]} hide/>
 
           <Tooltip />
 
@@ -38,8 +40,9 @@ const StrengthChart = ({records = []}) => {
             dataKey="weight"
             stroke="var(--accent)"
             strokeWidth={3}
-            dot={{ fill: "var(--accent)" }}
-            activeDot={{ fill: "var(--accent)" }}
+            dot={false}
+            activeDot={false}
+            dominantBaseline=""
           />
         </LineChart>
       </ResponsiveContainer>

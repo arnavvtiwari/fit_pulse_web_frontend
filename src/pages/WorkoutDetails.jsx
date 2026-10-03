@@ -43,12 +43,12 @@ const WorkoutDetails = () => {
       }
     };
   return (
-    <div className="bg-(--bg) h-screen flex flex-col p-4 gap-2 ">
+    <div className="bg-(--bg) min-h-screen flex flex-col p-4 gap-2 ">
       <Navbar name={"Bench Press"} />
       <span className="text-(--text-secondary)">Chest</span>
       <div className="grid grid-cols-2 gap-2">
-        <Databox header="Current" data={`${records?.[0]?.weight ?? 0}kg`} />
-        <Databox header={"PR"} data={pr} />
+        <Databox header="Current" data={`${records?.[0]?.weight ?? 0} kg`} />
+        <Databox header={"PR"} data={`${pr} kg`} />
       </div>
       <div className="p-2 bg-(--surface)">
         <StrengthChart records={records}/>

@@ -5,6 +5,8 @@ import WorkoutCard from '../components/WorkoutCard'
 import Modal from '../components/Modal'
 import { useCreateWorkoutMutation, useGetWorkoutsQuery } from '../features/workout/workoutApi'
 import { useNavigate } from 'react-router-dom'
+import { usePrQuery, useSessionQuery } from '../features/dashboard/dashboardApi'
+import { useCurrentWeightQuery } from '../features/weight/weightApi'
 
 const Workouts = () => {
   const [open, setOpen] = useState(false)
@@ -20,17 +22,11 @@ const Workouts = () => {
   });
   
  const { data, isWorkoutLoading, isError } = useGetWorkoutsQuery();
+ const {data : prData} = usePrQuery();
+ const {data : sessionData} = useSessionQuery();
+ const { data : currentWeight } = useCurrentWeightQuery();
  const workouts = data?.data || [];
- const calculateSessions = () =>{
-  let count = 0;
-  workouts?.map((workout)=>{
-    count += workout?.records?.length;
-  })
-  setSessions(count);
- }
- useEffect(()=>{
-  calculateSessions()
- },[workouts])
+
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -49,14 +45,17 @@ const Workouts = () => {
       console.log(error)
     }
   };
+  console.log(sessionData, prData)
   return (
     <div className="bg-(--bg) min-h-screen p-4 flex flex-col gap-2">
       <Topbar />
       <div className="grid grid-cols-2 gap-2">
         <Databox header={"Exercises"} data={workouts?.length} />
-        <Databox header={"Sessions"} data={sessions} />
-        <Databox header={"Body Weight"} data={'-'} />
-        <Databox header={"PRs this month"} data={'-'} />
+        <Databox header={"Sessions this month"} data={sessionData?.data?.sessions} />
+        <div onClick={()=>{navigate('/weight')}}>
+          <Databox header={"Body Weight"} data={`${currentWeight?.data?.weight} kg`} />
+        </div>
+        <Databox header={"PRs this month"} data={prData?.data?.prCount} />
       </div>
       <button
         className="bg-(--accent) text-lg font-bold rounded-xl p-2 my-4"
