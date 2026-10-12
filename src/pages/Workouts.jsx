@@ -53,7 +53,7 @@ const Workouts = () => {
         <Databox header={"Exercises"} data={workouts?.length} />
         <Databox header={"Sessions this month"} data={sessionData?.data?.sessions} />
         <div onClick={()=>{navigate('/weight')}}>
-          <Databox header={"Body Weight"} data={`${currentWeight?.data?.weight} kg`} />
+          <Databox header={"Body Weight"} data={`${currentWeight?.data?.weight || 0} kg`} />
         </div>
         <Databox header={"PRs this month"} data={prData?.data?.prCount} />
       </div>
