@@ -14,9 +14,14 @@ export const weight = api.injectEndpoints({
         method: "GET",
       }),
     }),
-
-    
+    addWeight: builder.mutation({
+      query: (data) => ({
+        url: "/weight/addWeight",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useCurrentWeightQuery, useWeightListQuery } = weight;
+export const { useCurrentWeightQuery, useWeightListQuery, useAddWeightMutation } = weight;

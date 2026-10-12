@@ -9,7 +9,7 @@ import {
 } from "recharts";
 
 
-const StrengthChart = ({records = []}) => {
+const StrengthChart = ({records = [], xAxis = true, yAxis = true}) => {
 
   const data = [...records].reverse().map((record) => ({
     date: new Date(record.createdAt).toLocaleDateString("en-IN", {
@@ -29,9 +29,9 @@ const StrengthChart = ({records = []}) => {
         >
           {/* <CartesianGrid strokeDasharray="3 3" /> */}
 
-          <XAxis dataKey="date" hide/>
+          <XAxis dataKey="date" hide = {xAxis}/>
 
-          <YAxis width={30} domain={[minWeight,maxWeight]} hide/>
+          <YAxis width={30} domain={[minWeight,maxWeight]} hide = {yAxis}/>
 
           <Tooltip />
 
